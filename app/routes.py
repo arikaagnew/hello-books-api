@@ -42,8 +42,8 @@ def read_all_books():
     return jsonify(books_response)
 
 @books_bp.route("/<book_id>", methods=["GET"])
-def read_one_book(model_id):
-    book = validate_model(Book,model_id)
+def read_one_book(book_id):
+    book = validate_model(Book,book_id)
     return book.to_dict()
 
 @books_bp.route("/<book_id>", methods=["PUT"])
@@ -61,7 +61,7 @@ def update_book(model_id):
 
 @books_bp.route("/<book_id>", methods=["DELETE"])
 def delete_book(book_id):
-    book = validate_book(Book,book_id)
+    book = validate_model(Book,book_id)
 
     db.session.delete(book)
     db.session.commit()
